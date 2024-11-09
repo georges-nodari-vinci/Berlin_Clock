@@ -1,0 +1,18 @@
+{
+  "name": "berlin_clock",
+  "version": "1.0.0",
+  "description": "This project is an implementation of the Berlin Clock as part of a Test-Driven Development (TDD) practice exercise. The goal is to transform digital time into the format of the Berlin clock by following a test-driven development approach.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/georges-nodari-vinci/Berlin_Clock.git"
+  },
+  "author": "Groupe 10",
+  "homepage": "https://github.com/georges-nodari-vinci/Berlin_Clock#readme",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "jasmine": "^5.4.0"
+  }
+}
