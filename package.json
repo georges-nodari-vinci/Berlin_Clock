@@ -1,6 +1,7 @@
 {
   "name": "berlin_clock",
   "version": "1.0.0",
+  "type": "module",
   "description": "This project is an implementation of the Berlin Clock as part of a Test-Driven Development (TDD) practice exercise. The goal is to transform digital time into the format of the Berlin clock by following a test-driven development approach.",
   "main": "app.js",
   "repository": {
