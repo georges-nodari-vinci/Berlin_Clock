@@ -6,8 +6,12 @@
  * Example: For 2 minutes, it will return 'YYOO'; for 3 minutes, it will return 'YYYO'.
  */
 export function getSimpleMinutesRowFromTimestamp(timestamp) {
+  // Extract the minutes from the timestamp (0-59)
   const minutes = timestamp.getMinutes(); 
+  
+  // Determine how many lamps should be on (from 0 to 4)
   const onLamps = minutes % 5; 
 
+  // Create a string with 'Y' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "Y".repeat(onLamps).padEnd(4, "O");
 }
