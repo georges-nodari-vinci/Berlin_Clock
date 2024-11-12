@@ -31,5 +31,8 @@ describe("Berlin Clock - Five Minutes Row from Timestamp", () => {
     expect(getFiveMinutesRowFromTimestamp(timestamp)).toEqual("YYRYYRYYROO");
   });
 
-
+  it("should display 11 lamps with 3 red lamps on for 55 minutes", () => {
+    const timestamp = new Date("2024-11-11T00:55:00");
+    expect(getFiveMinutesRowFromTimestamp(timestamp)).toEqual("YYRYYRYYRYY");
+  });
 });
