@@ -21,4 +21,8 @@ describe("Berlin Clock - Simple Hours Row from Timestamp", () => {
     expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYYO");
   });
 
+  it("should display 4 lamps on for 4 minutes", () => {
+    const timestamp = new Date("2024-11-11T00:04:00").getMinutes(); // 4:00 AM
+    expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYYY");
+  });
 });
