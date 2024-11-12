@@ -3,9 +3,7 @@ export function convertToBerlinClock() {
 }
 
 
-export function getSimpleMinutesRowFromTimestamp(timestamp) {
-  const minutes = timestamp.getMinutes(); // Extract the minutes from the timestamp (0-59)
-  const onLamps = minutes % 5; // Determine how many lamps should be on (from 0 to 4)
-
-  return "Y".repeat(onLamps).padEnd(4, "O");
+export function getSimpleMinutesRowFromTimestamp(minutesTimestamp) {
+  const minute = minutesTimestamp % 5; // Determine how many lamps should be on (from 0 to 4)
+  return "Y".repeat(minute).padEnd(4, "O");
 }
