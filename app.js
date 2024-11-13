@@ -1,3 +1,12 @@
+export function convertToBerlinClock() {
+  // implement the complete code Berlin Clock here
+}
+
+
+
+
+
+
 /**
  * @summary Returns the Berlin Clock 5 hour bloc row as a string of 4 characters.
  * Each 'R' represents 5 hours lamp that is red (on), and 'O' represents a lamp that is off.
