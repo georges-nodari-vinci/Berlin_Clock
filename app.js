@@ -1,3 +1,28 @@
+function determineLampsOn(number) {
+  return number % 5;
+}
+
+function determineLampsOnForHighHoursOrMinutes(hours) {
+  return Math.floor(hours / 5);
+}
+
+function generateFiveMinuteLamps(onLamps, row) {
+  for (let i = 1; i <= onLamps; i++) {
+    // For every third lamp, use 'R' for quarters, otherwise use 'Y'
+    if (i % 3 === 0) {
+      row += "R"; // Red lamp for quarters
+    } else {
+      row += "Y"; // Yellow lamp for other five-minute blocks
+    }
+  }
+  return row;
+}
+
+function isEvenSecond(seconds) {
+  return seconds % 2 === 0;
+}
+
+
 /**
  * @summary
  * Determines the state of the seconds lamp in the Berlin Clock.
@@ -12,8 +37,10 @@
 export function getSecondsLamp(timestamp) {
   // The lamp is red ('R') for even seconds, and off ('O') for odd seconds.
   const seconds = timestamp.getSeconds(); // Extract the seconds from the timestamp (0-59)
-  return seconds % 2 === 0 ? "R" : "O";
+  return isEvenSecond(seconds) ? "R" : "O";
 }
+
+
 
 /**
  * @summary Returns the Berlin Clock 5 hour bloc row as a string of 4 characters.
@@ -25,10 +52,12 @@ export function getHighHoursRowFromTimestamp(timestamp) {
   // Extract the hours from the timestamp (0-23)
   const hours = timestamp.getHours();
   // Determine how many lamps should be on (from 0 to 4)
-  const onLamps = Math.floor(hours / 5);
+  const onLamps = determineLampsOnForHighHoursOrMinutes(hours);
   // Create a string with 'R' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "R".repeat(onLamps).padEnd(4, "O");
 }
+
+
 
 /**
  * @summary Returns the Berlin Clock simple hours row as a string of 4 characters.
@@ -39,10 +68,12 @@ export function getHighHoursRowFromTimestamp(timestamp) {
  */
 export function getSimpleHoursRowFromTimestamp(timestamp) {
   const hours = timestamp.getHours(); // Extract the hours from the timestamp (0-23)
-  const onLamps = hours % 5; // Determine how many lamps should be on (from 0 to 4)
+  const onLamps = determineLampsOn(hours); // Determine how many lamps should be on (from 0 to 4)
 
   return "R".repeat(onLamps).padEnd(4, "O");
 }
+
+
 
 /**
  * @summary Returns the Berlin Clock simple minutes row as a string of 4 characters.
@@ -56,7 +87,7 @@ export function getSimpleMinutesRowFromTimestamp(timestamp) {
   const minutes = timestamp.getMinutes();
 
   // Determine how many lamps should be on (from 0 to 4)
-  const onLamps = minutes % 5;
+  const onLamps = determineLampsOn(minutes);
 
   // Create a string with 'Y' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "Y".repeat(onLamps).padEnd(4, "O");
@@ -74,21 +105,16 @@ export function getFiveMinutesRowFromTimestamp(timestamp) {
   const minutes = timestamp.getMinutes();
 
   // Determine how many lamps should be on (from 0 to 11)
-  const onLamps = Math.floor(minutes / 5);
+  const onLamps = determineLampsOnForHighHoursOrMinutes(minutes);
 
   // Initialize an empty string to build the row
   let row = "";
 
   // Loop through the number of lamps that should be on
-  for (let i = 1; i <= onLamps; i++) {
-    // For every third lamp, use 'R' for quarters, otherwise use 'Y'
-    if (i % 3 === 0) {
-      row += "R"; // Red lamp for quarters
-    } else {
-      row += "Y"; // Yellow lamp for other five-minute blocks
-    }
-  }
+  row = generateFiveMinuteLamps(onLamps, row);
 
   // Pad the end of the string with 'O' to ensure it is 11 characters long
   return row.padEnd(11, "O");
 }
+
+
