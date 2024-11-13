@@ -22,6 +22,20 @@ export function getSecondsLamp(timestamp) {
  * @returns {string} A string representing the 5 hours row in Berlin Clock format.
  */
 
+/**
+ * @summary Returns the Berlin Clock simple hours row as a string of 4 characters.
+ * Each 'R' represents an hour lamp that is red (on), and 'O' represents a lamp that is off.
+ * @param {Date} timestamp - A JavaScript Date object representing the current time.
+ * @returns {string} A string representing the simple hours row in Berlin Clock format.
+ * Example: For 2 hours, it will return 'RROO'; for 3 hours, it will return 'RRRO'.
+ */
+export function getSimpleHoursRowFromTimestamp(timestamp) {
+  const hours = timestamp.getHours(); // Extract the hours from the timestamp (0-23)
+  const onLamps = hours % 5; // Determine how many lamps should be on (from 0 to 4)
+
+  return "R".repeat(onLamps).padEnd(4, "O");
+}
+
 export function getHighHoursRowFromTimestamp(timestamp) {
   // Extract the hours from the timestamp (0-23)
   const hours = timestamp.getHours();
@@ -39,10 +53,10 @@ export function getHighHoursRowFromTimestamp(timestamp) {
  */
 export function getSimpleMinutesRowFromTimestamp(timestamp) {
   // Extract the minutes from the timestamp (0-59)
-  const minutes = timestamp.getMinutes(); 
-  
+  const minutes = timestamp.getMinutes();
+
   // Determine how many lamps should be on (from 0 to 4)
-  const onLamps = minutes % 5; 
+  const onLamps = minutes % 5;
 
   // Create a string with 'Y' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "Y".repeat(onLamps).padEnd(4, "O");
@@ -57,10 +71,10 @@ export function getSimpleMinutesRowFromTimestamp(timestamp) {
 export function getFiveMinutesRowFromTimestamp(timestamp) {
   // Extract the minutes from the timestamp (0-59)
   const minutes = timestamp.getMinutes();
-  
+
   // Determine how many lamps should be on (from 0 to 11)
   const onLamps = Math.floor(minutes / 5);
-  
+
   // Initialize an empty string to build the row
   let row = "";
 
