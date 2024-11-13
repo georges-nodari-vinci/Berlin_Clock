@@ -30,6 +30,7 @@ export function getHighHoursRowFromTimestamp(timestamp) {
   // Create a string with 'R' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "R".repeat(onLamps).padEnd(4, "O");
 }
+/**
  * @summary Returns the Berlin Clock simple minutes row as a string of 4 characters.
  * Each 'Y' represents a minute lamp that is yellow (on), and 'O' represents a lamp that is off.
  * @param {Date} timestamp - A JavaScript Date object representing the current time.
