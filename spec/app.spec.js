@@ -1,6 +1,3 @@
-
-
-
 import { getHighHoursRowFromTimestamp } from "../app.js";
 
 describe("Berlin Clock - 5 Hours Row from Timestamp", () => {
@@ -25,14 +22,12 @@ describe("Berlin Clock - 5 Hours Row from Timestamp", () => {
   });
 
   it("should display 4 lamps on for 20 hours", () => {
-    const timestamp = new Date("2024-11-11T20:00:00");//20:00
+    const timestamp = new Date("2024-11-11T20:00:00"); //20:00
     expect(getHighHoursRowFromTimestamp(timestamp)).toEqual("RRRR");
   });
 
   it("should display 4 lamps on for 22 hours", () => {
-    const timestamp = new Date("2024-11-11T22:15:15");//22:15:15
+    const timestamp = new Date("2024-11-11T22:15:15"); //22:15:15
     expect(getHighHoursRowFromTimestamp(timestamp)).toEqual("RRRR");
   });
-
-
 });
