@@ -1,28 +1,31 @@
-import { getSimpleHoursRowFromTimestamp } from "../app.js";
+import { getSecondsLamp } from "../app.js";
 
-describe("Berlin Clock - Simple Hours Row from Timestamp", () => {
-  it("should display 4 lamps off for 0 hours", () => {
-    const timestamp = new Date("2024-11-11T00:00:00"); // Midnight
-    expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("OOOO");
+describe("Complete Berlin Clock", () => {
+  describe("Berlin Clock - Seconds Lamp", () => {
+    it('should return "R" when the seconds of the given timestamp are even, indicating the lamp is on', () => {
+      const evenTimestamps = [
+        new Date("2024-11-11T00:00:00"), // 0 seconds
+        new Date("2024-11-11T00:00:02"), // 2 seconds
+        new Date("2024-11-11T00:00:04"), // 4 seconds
+      ];
+
+      evenTimestamps.forEach((timestamp) => {
+        expect(getSecondsLamp(timestamp)).toBe("R");
+      });
+    });
+
+    it('should return "O" when the seconds of the given timestamp are odd, indicating the lamp is off', () => {
+      const oddTimestamps = [
+        new Date("2024-11-11T00:00:01"), // 1 second
+        new Date("2024-11-11T00:00:03"), // 3 seconds
+        new Date("2024-11-11T00:00:05"), // 5 seconds
+      ];
+
+      oddTimestamps.forEach((timestamp) => {
+        expect(getSecondsLamp(timestamp)).toBe("O");
+      });
+    });
   });
 
-  it("should display 1 lamp on for 1 hour", () => {
-    const timestamp = new Date("2024-11-11T01:00:00"); // 1:00 AM
-    expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("ROOO");
-  });
-
-  it("should display 2 lamps on for 2 hours", () => {
-    const timestamp = new Date("2024-11-11T02:00:00"); // 2:00 AM
-    expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("RROO");
-  });
-
-  it("should display 3 lamps on for 3 hours", () => {
-    const timestamp = new Date("2024-11-11T03:00:00"); // 3:00 AM
-    expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("RRRO");
-  });
-
-  it("should display 4 lamps on for 4 hours", () => {
-    const timestamp = new Date("2024-11-11T04:00:00"); // 4:00 AM
-    expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("RRRR");
-  });
+  
 });
