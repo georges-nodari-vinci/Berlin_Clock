@@ -21,6 +21,14 @@ export function getSecondsLamp(timestamp) {
  * @param {Date} timestamp - A JavaScript Date object representing the current time.
  * @returns {string} A string representing the 5 hours row in Berlin Clock format.
  */
+export function getHighHoursRowFromTimestamp(timestamp) {
+  // Extract the hours from the timestamp (0-23)
+  const hours = timestamp.getHours();
+  // Determine how many lamps should be on (from 0 to 4)
+  const onLamps = Math.floor(hours / 5);
+  // Create a string with 'R' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
+  return "R".repeat(onLamps).padEnd(4, "O");
+}
 
 /**
  * @summary Returns the Berlin Clock simple hours row as a string of 4 characters.
@@ -36,14 +44,6 @@ export function getSimpleHoursRowFromTimestamp(timestamp) {
   return "R".repeat(onLamps).padEnd(4, "O");
 }
 
-export function getHighHoursRowFromTimestamp(timestamp) {
-  // Extract the hours from the timestamp (0-23)
-  const hours = timestamp.getHours();
-  // Determine how many lamps should be on (from 0 to 4)
-  const onLamps = Math.floor(hours / 5);
-  // Create a string with 'R' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
-  return "R".repeat(onLamps).padEnd(4, "O");
-}
 /**
  * @summary Returns the Berlin Clock simple minutes row as a string of 4 characters.
  * Each 'Y' represents a minute lamp that is yellow (on), and 'O' represents a lamp that is off.
@@ -61,6 +61,7 @@ export function getSimpleMinutesRowFromTimestamp(timestamp) {
   // Create a string with 'Y' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "Y".repeat(onLamps).padEnd(4, "O");
 }
+
 /**
  * @summary Returns the Berlin Clock five minutes row as a string of 11 characters.
  * Each 'Y' represents a yellow lamp that is on, 'R' represents a red lamp that is on (for quarters), and 'O' represents a lamp that is off.

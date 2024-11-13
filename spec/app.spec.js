@@ -3,6 +3,7 @@ import {
   getHighHoursRowFromTimestamp,
   getSimpleMinutesRowFromTimestamp,
   getFiveMinutesRowFromTimestamp,
+  getSimpleHoursRowFromTimestamp,
 } from "../app.js";
 
 describe("Complete Berlin Clock", () => {
@@ -63,35 +64,31 @@ describe("Complete Berlin Clock", () => {
       expect(getHighHoursRowFromTimestamp(timestamp)).toEqual("RRRR");
     });
   });
-  describe("Berlin Clock - Simple minutes Row from Timestamp", () => {
-    it("should display 0 lamps off for 0 minutes", () => {
-      const timestamp = new Date("2024-11-11T00:00:00");
-      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("OOOO");
+
+  describe("Berlin Clock - Simple Hours Row from Timestamp", () => {
+    it("should display 4 lamps off for 0 hours", () => {
+      const timestamp = new Date("2024-11-11T00:00:00"); // Midnight
+      expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("OOOO");
     });
 
-    it("should display 1 lamp on for 1 minute", () => {
-      const timestamp = new Date("2024-11-11T00:01:00"); // 0:01 AM
-      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YOOO");
+    it("should display 1 lamp on for 1 hour", () => {
+      const timestamp = new Date("2024-11-11T01:00:00"); // 1:00 AM
+      expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("ROOO");
     });
 
-    it("should display 2 lamps on for 2 minutes", () => {
-      const timestamp = new Date("2024-11-11T00:02:00"); // 0:02 AM
-      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYOO");
+    it("should display 2 lamps on for 2 hours", () => {
+      const timestamp = new Date("2024-11-11T02:00:00"); // 2:00 AM
+      expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("RROO");
     });
 
-    it("should display 3 lamps on for 3 minutes", () => {
-      const timestamp = new Date("2024-11-11T00:03:00"); // 0:03 AM
-      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYYO");
+    it("should display 3 lamps on for 3 hours", () => {
+      const timestamp = new Date("2024-11-11T03:00:00"); // 3:00 AM
+      expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("RRRO");
     });
 
-    it("should display 4 lamps on for 4 minutes", () => {
-      const timestamp = new Date("2024-11-11T00:04:00"); // 0:04 AM
-      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYYY");
-    });
-
-    it("should display 0 lamps on for 5 minutes", () => {
-      const timestamp = new Date("2024-11-11T00:05:00"); // 0:05 AM
-      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("OOOO");
+    it("should display 4 lamps on for 4 hours", () => {
+      const timestamp = new Date("2024-11-11T04:00:00"); // 4:00 AM
+      expect(getSimpleHoursRowFromTimestamp(timestamp)).toEqual("RRRR");
     });
   });
 
@@ -129,6 +126,38 @@ describe("Complete Berlin Clock", () => {
     it("should display 11 lamps with 3 red lamps on for 55 minutes", () => {
       const timestamp = new Date("2024-11-11T00:55:00");
       expect(getFiveMinutesRowFromTimestamp(timestamp)).toEqual("YYRYYRYYRYY");
+    });
+  });
+
+  describe("Berlin Clock - Simple minutes Row from Timestamp", () => {
+    it("should display 0 lamps off for 0 minutes", () => {
+      const timestamp = new Date("2024-11-11T00:00:00");
+      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("OOOO");
+    });
+
+    it("should display 1 lamp on for 1 minute", () => {
+      const timestamp = new Date("2024-11-11T00:01:00"); // 0:01 AM
+      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YOOO");
+    });
+
+    it("should display 2 lamps on for 2 minutes", () => {
+      const timestamp = new Date("2024-11-11T00:02:00"); // 0:02 AM
+      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYOO");
+    });
+
+    it("should display 3 lamps on for 3 minutes", () => {
+      const timestamp = new Date("2024-11-11T00:03:00"); // 0:03 AM
+      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYYO");
+    });
+
+    it("should display 4 lamps on for 4 minutes", () => {
+      const timestamp = new Date("2024-11-11T00:04:00"); // 0:04 AM
+      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("YYYY");
+    });
+
+    it("should display 0 lamps on for 5 minutes", () => {
+      const timestamp = new Date("2024-11-11T00:05:00"); // 0:05 AM
+      expect(getSimpleMinutesRowFromTimestamp(timestamp)).toEqual("OOOO");
     });
   });
 });
