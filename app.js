@@ -1,4 +1,4 @@
-function determineLampsOn(number) {
+function determineLampsOnForSimpleHoursOrMinutes(number) {
   return number % 5;
 }
 
@@ -68,7 +68,7 @@ export function getHighHoursRowFromTimestamp(timestamp) {
  */
 export function getSimpleHoursRowFromTimestamp(timestamp) {
   const hours = timestamp.getHours(); // Extract the hours from the timestamp (0-23)
-  const onLamps = determineLampsOn(hours); // Determine how many lamps should be on (from 0 to 4)
+  const onLamps = determineLampsOnForSimpleHoursOrMinutes(hours); // Determine how many lamps should be on (from 0 to 4)
 
   return "R".repeat(onLamps).padEnd(4, "O");
 }
@@ -87,7 +87,7 @@ export function getSimpleMinutesRowFromTimestamp(timestamp) {
   const minutes = timestamp.getMinutes();
 
   // Determine how many lamps should be on (from 0 to 4)
-  const onLamps = determineLampsOn(minutes);
+  const onLamps = determineLampsOnForSimpleHoursOrMinutes(minutes);
 
   // Create a string with 'Y' repeated for the number of on lamps, and pad the end with 'O' to ensure the string is 4 characters long
   return "Y".repeat(onLamps).padEnd(4, "O");
